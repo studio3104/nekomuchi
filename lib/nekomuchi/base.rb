@@ -24,11 +24,15 @@ module NekoMuchi
     def construct_plugin(plugin_class)
       require "nekomuchi/plugin/#{plugin_class.to_s.downcase}"
 
-      if @klass[plugin_class] && @klass[plugin_class].connection_active?
-        @klass[plugin_class]
-      else
-        @klass[plugin_class] = NekoMuchi::Plugin.const_get(plugin_class.to_s).new(@hostname, @config)
+      if @klass[plugin_class]
+        if @klass[plugin_class].active?
+          return @klass[plugin_class]
+        else
+          @klass[plugin_class].close
+        end
       end
+
+      @klass[plugin_class] = NekoMuchi::Plugin.const_get(plugin_class.to_s).new(@hostname, @config)
     end
   end
 end

@@ -1,6 +1,12 @@
-require 'mysql2-cs-bind'
+require 'nekomuchi/plugin/base'
+require 'nekomuchi/connector/ssh'
+require 'nekomuchi/connector/mysql'
 
-class NekoMuchi::Plugin::MySQL < NekoMuchi::Plugin::SSH
+
+class NekoMuchi::Plugin::MySQL < NekoMuchi::Plugin::Base
+  include NekoMuchi::Connector::SSH
+  include NekoMuchi::Connector::MySQL
+
   def databases
     client.xquery('SHOW DATABASES')
   end

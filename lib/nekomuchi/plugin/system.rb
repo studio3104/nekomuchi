@@ -1,7 +1,10 @@
-require 'nekomuchi/plugin/ssh'
+require 'nekomuchi/plugin/base'
+require 'nekomuchi/connector/ssh'
 require 'bigdecimal'
 
-class NekoMuchi::Plugin::System < NekoMuchi::Plugin::SSH
+class NekoMuchi::Plugin::System < NekoMuchi::Plugin::Base
+  include NekoMuchi::Connector::SSH
+
   def os_version
     ssh_exec('cat /etc/redhat-release').chomp
   end
