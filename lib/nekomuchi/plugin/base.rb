@@ -8,23 +8,9 @@ module NekoMuchi
         @connection = {}
       end
 
-      def active?(type = nil)
-        return false if @connection.empty?
-
-        if type
-          return send("#{type}_connection_active?")
-        else
-          @connection.each do |_type, connection|
-            return false unless send("#{_type}_connection_active?")
-          end
-        end
-
-        true
-      end
-
       def close
         @connection.each do |type, connection|
-          send("#{type}_connection_close") if active?(type)
+          send("#{type}_connection_close")
         end
       end
 

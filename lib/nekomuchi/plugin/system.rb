@@ -1,20 +1,20 @@
 require 'nekomuchi/plugin/base'
-require 'nekomuchi/connector/ssh'
+require 'nekomuchi/helper/ssh'
 require 'bigdecimal'
 
 class NekoMuchi::Plugin::System < NekoMuchi::Plugin::Base
-  include NekoMuchi::Connector::SSH
+  include NekoMuchi::Helper::SSH
 
   def os_version
-    ssh_exec('cat /etc/redhat-release').chomp
+    ssh('cat /etc/redhat-release').chomp
   end
 
   def arch
-    ssh_exec('uname -m').chomp
+    ssh('uname -m').chomp
   end
 
   def memory(command_result: nil, unit: 'kB') #command_result for test
-    command_result = command_result ? command_result : ssh_exec('cat /proc/meminfo')
+    command_result = command_result ? command_result : ssh('cat /proc/meminfo')
     memory = {}
 
     command_result.each_line do |line|
@@ -43,7 +43,7 @@ class NekoMuchi::Plugin::System < NekoMuchi::Plugin::Base
     cpu = []
     cpu_core_number = 0
 
-    ssh_exec('cat /proc/cpuinfo').each_line do |line|
+    ssh('cat /proc/cpuinfo').each_line do |line|
       line = line.strip
       next if line.match(/^$/)
 

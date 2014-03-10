@@ -1,7 +1,7 @@
 require 'net/ssh'
 
 module NekoMuchi
-  module Connector
+  module Helper
     module SSH
       def ssh_connection_active?
         @connection[:ssh] && !@connection[:ssh].closed?
@@ -13,7 +13,7 @@ module NekoMuchi
 
       private
 
-      def ssh_exec(command)
+      def ssh(command)
         result = ''
 
         ssh_client.exec(command) do |channel, stream, data|

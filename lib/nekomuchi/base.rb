@@ -7,7 +7,8 @@ module NekoMuchi
     end
 
     def const(plugin_class)
-      construct_plugin(plugin_class)
+      require "nekomuchi/plugin/#{plugin_class.to_s.downcase}"
+      @klass[plugin_class] ||= NekoMuchi::Plugin.const_get(plugin_class.to_s).new(@hostname, @config)
     end
 
     def gets!
@@ -17,22 +18,6 @@ module NekoMuchi
         results[klass_name] = object.flush_and_return_results
       end
       results
-    end
-
-    private
-
-    def construct_plugin(plugin_class)
-      require "nekomuchi/plugin/#{plugin_class.to_s.downcase}"
-
-      if @klass[plugin_class]
-        if @klass[plugin_class].active?
-          return @klass[plugin_class]
-        else
-          @klass[plugin_class].close
-        end
-      end
-
-      @klass[plugin_class] = NekoMuchi::Plugin.const_get(plugin_class.to_s).new(@hostname, @config)
     end
   end
 end
