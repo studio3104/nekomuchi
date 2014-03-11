@@ -28,8 +28,15 @@ class NekoMuchi::Plugin::MySQL < NekoMuchi::Plugin::Base
     result
   end
 
-  def variables(target: nil, global: false)
+  def variables(like: nil, global: false)
     query = global ? 'SHOW GLOBAL VARIABLES' : 'SHOW VARIABLES'
+    query = if like
+              validate_sql(like)
+              "#{query} LIKE '#{like}'"
+            else
+              query
+            end
+
     result = {}
     mysql(query).each do |row|
       result[row['Variable_name']] = row['Value']
