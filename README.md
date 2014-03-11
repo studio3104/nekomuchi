@@ -60,6 +60,8 @@ nekomuchi.const(:MySQL).get!(:variables, like: 'version')
 
 - changing how to treat configurations
 - hold connection object on `NekoMuchi::Base` (hold per plugin instances now)
+- write more plugins and plugin methods
+- write more tests
 
 ## Contributing
 
