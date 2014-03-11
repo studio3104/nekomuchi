@@ -1,6 +1,6 @@
 # NekoMuchi [![Build Status](https://travis-ci.org/studio3104/nekomuchi.png)](https://travis-ci.org/studio3104/nekomuchi)
 
-Server informtions aggregator
+Server informations aggregator
 
 ## Installation
 
