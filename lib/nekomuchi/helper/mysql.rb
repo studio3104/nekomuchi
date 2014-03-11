@@ -1,6 +1,7 @@
 require 'mysql2-cs-bind'
 
 module NekoMuchi
+  class InvalidBindVariableError < StandardError; end
   module Helper
     module MySQL
       def mysql_connection_active?
@@ -11,6 +12,11 @@ module NekoMuchi
         @connection[:mysql].close if mysql_connection_active?
       end
 
+      def validate_sql(*components)
+        invalids = components.select { |c| !c.match(/\A[0-9a-zA-Z_-]+\z/) }
+        raise NekoMuchi::InvalidBindVariableError, "invalid bind variable - #{invalids}" unless invalids.empty?
+        return true
+      end
       private
 
       def mysql(query, *bind_variables)
