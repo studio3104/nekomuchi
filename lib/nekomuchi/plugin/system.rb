@@ -63,4 +63,29 @@ class NekoMuchi::Plugin::System < NekoMuchi::Plugin::Base
 
     cpu
   end
+
+  def mdstat
+    example = <<EOF
+Personalities : [raid6] [raid5] [raid4]
+md0 : active raid5 hda8[3] hda7[2] hda6[1] hda5[0]
+      30025152 blocks level 5, 64k chunk, algorithm 2 [4/4] [UUUU]
+
+unused devices: (none)
+EOF
+    key = ''
+    result = {}
+    ssh('cat /proc/mdstat').each_line do |line|
+      split_line = line.split(/\s*\:\s/)
+      value = if split_line.size == 2
+                key = split_line.first.gsub(/\s+/, '_').to_sym
+                split_line.last
+              else
+                line
+              end
+      value = value.strip
+      result[key] = result[key] ? result[key] + ' ' + value : value
+    end
+
+    result
+  end
 end
