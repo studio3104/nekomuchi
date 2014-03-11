@@ -15,7 +15,8 @@ module NekoMuchi
       results = {}
       @klass.each do |klass_name, object|
         object.close
-        results[klass_name] = object.flush_and_return_results
+        result = object.flush_and_return_results
+        results[klass_name] = result unless result.empty?
       end
       results
     end
