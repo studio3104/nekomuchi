@@ -1,4 +1,4 @@
-# Nekomuchi
+# NekoMuchi [![Build Status](https://travis-ci.org/studio3104/nekomuchi.png)](https://travis-ci.org/studio3104/nekomuchi)
 
 TODO: Write a gem description
 
