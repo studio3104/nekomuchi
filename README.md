@@ -38,7 +38,7 @@ config = {
    },
 }
 
-nekomuchi = NekoMUchi::Base.new(hostname, config)
+nekomuchi = NekoMuchi::Base.new(hostname, config)
 ```
 
 #### get some informations with single connection
