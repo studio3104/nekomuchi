@@ -5,10 +5,6 @@ require 'bigdecimal'
 class NekoMuchi::Plugin::System < NekoMuchi::Plugin::Base
   include NekoMuchi::Helper::SSH
 
-  def os_version
-    ssh('cat /etc/redhat-release').chomp
-  end
-
   def arch
     ssh('uname -m').chomp
   end
