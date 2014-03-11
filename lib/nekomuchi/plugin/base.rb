@@ -40,10 +40,6 @@ module NekoMuchi
         @results.clear
         results
       end
-
-      def method_missing
-        #!!atode!! undefined method なんとかみたいな例外にする
-      end
     end
   end
 end
