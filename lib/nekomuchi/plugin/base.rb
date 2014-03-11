@@ -35,9 +35,9 @@ module NekoMuchi
 
       def call_plugin_method(method_name, *options)
         if options.empty?
-          { method_name => send(method_name.to_s) }
+          send(method_name.to_s)
         else
-          { method_name => send(method_name.to_s, *options) }
+          send(method_name.to_s, *options)
         end
       end
     end
