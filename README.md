@@ -1,4 +1,4 @@
-# NekoMuchi [![Build Status](https://travis-ci.org/studio3104/nekomuchi.png)](https://travis-ci.org/studio3104/nekomuchi)
+# NekoMuchi [![Build Status](https://travis-ci.org/studio3104/nekomuchi.png)](https://travis-ci.org/studio3104/nekomuchi) [![Code Climate](https://codeclimate.com/github/studio3104/nekomuchi.png)](https://codeclimate.com/github/studio3104/nekomuchi)
 
 Server informations aggregator
 
